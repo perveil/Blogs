@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laiso.blogs.dao.ArticleMapper">
+  <resultMap id="BaseResultMap" type="com.laiso.blogs.model.Article">
+    <id column="article_id" jdbcType="INTEGER" property="articleId" />
+    <result column="article_label" jdbcType="VARCHAR" property="articleLabel" />
+    <result column="article_likenum" jdbcType="INTEGER" property="articleLikenum" />
+    <result column="article_superArticleId" jdbcType="INTEGER" property="articleSuperarticleid" />
+    <result column="article_content" jdbcType="LONGVARCHAR" property="articleContent" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from article
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.laiso.blogs.model.Article">
+
+    <selectKey keyProperty="articleId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into article (article_label, article_likenum, article_superArticleId, 
+      article_content)
+    values (#{articleLabel,jdbcType=VARCHAR}, #{articleLikenum,jdbcType=INTEGER}, #{articleSuperarticleid,jdbcType=INTEGER}, 
+      #{articleContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.laiso.blogs.model.Article">
+
+    update article
+    set article_label = #{articleLabel,jdbcType=VARCHAR},
+      article_likenum = #{articleLikenum,jdbcType=INTEGER},
+      article_superArticleId = #{articleSuperarticleid,jdbcType=INTEGER},
+      article_content = #{articleContent,jdbcType=LONGVARCHAR}
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select article_id, article_label, article_likenum, article_superArticleId, article_content
+    from article
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select article_id, article_label, article_likenum, article_superArticleId, article_content
+    from article
+  </select>
+</mapper>

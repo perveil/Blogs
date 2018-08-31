@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="application.properties" />
+    <context id="mysqltables" targetRuntime="MyBatis3Simple">
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="${spring.datasource.url}" password="ruirui"
+                        userId="root"
+        >
+        </jdbcConnection>
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false"></property>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.laiso.blogs.model" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"></property>
+            <property  name="trimStrings"  value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property  name="enableSubPackages"  value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.laiso.blogs.dao" targetProject="src/main/java">
+            <property  name="enableSubPackages"  value="true"/>
+        </javaClientGenerator>
+
+
+
+
+        <table tableName="article"  domainObjectName="Article" schema="blogs"
+               enableCountByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" enableUpdateByExample="true"
+        >
+            <generatedKey column="article_id" sqlStatement="MySql" identity="true"></generatedKey>
+        </table>
+
+        <table tableName="blogs"  domainObjectName="Blog" schema="blogs"
+               enableCountByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" enableUpdateByExample="true"
+        >
+            <generatedKey column="blogsId" sqlStatement="MySql" identity="true"></generatedKey>
+        </table>
+
+        <table tableName="comment"  domainObjectName="Comment" schema="blogs"
+               enableCountByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" enableUpdateByExample="true"
+        >
+            <generatedKey column="comment_id" sqlStatement="MySql" identity="true"></generatedKey>
+        </table>
+
+
+    </context>
+</generatorConfiguration>
