@@ -40,4 +40,27 @@
     select article_id, article_label, article_likenum, article_superArticleId, article_content
     from article
   </select>
+
+
+  <select id="selectBysuperid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select  article_label, article_likenum, article_content
+    from article
+    where article_superArticleId = #{superid,jdbcType=INTEGER}
+  </select>
+  <update id="UpdateArticle" parameterType="com.laiso.blogs.model.Article">
+      update article
+    <trim prefix="set" suffixOverrides=",">
+      <if test="articleLabel!=null">article_label=#{articleLabel},</if>
+      <if test="articleLikenum!=0">article_likenum=#{articleLikenum},</if>
+      <if test="articleContent!=null">article_content=#{articleContent},</if>
+    </trim>
+    where article_id=#{articleId}
+  </update>
+  <select id="blurFindArticle" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select *
+    from article
+    where article_label like CONCAT('%',#{keyword},'%') and  article_superArticleId is not NULL
+  </select>
+  
+
 </mapper>

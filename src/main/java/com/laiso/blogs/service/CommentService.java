@@ -1,9 +1,13 @@
 package com.laiso.blogs.service;
 
+import com.github.pagehelper.PageInfo;
 import com.laiso.blogs.model.Comment;
-import com.laiso.blogs.utils.Page;
+
+import java.util.List;
 
 public interface CommentService {
-    Page<Comment> getPageOfComment(int pageNum,int pageSize);
+    PageInfo<Comment> getPageOfComment(String articleId,int pageNum, int pageSize);
+    void addComment(Comment comment);
+    List<Comment> findComment(Integer articleId);
 
 }

@@ -1,6 +1,8 @@
 package com.laiso.blogs.model;
 
-public class Article {
+import java.io.Serializable;
+
+public class Article implements Serializable {
 
     private Integer articleId;
 
